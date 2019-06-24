@@ -48,6 +48,14 @@ void loop()
         }
         break;
     case 2:
+        float press_duration_sec = press_duration/1000.0;
+        // Do something, depending on how long the press was
+        if (press_duration_sec >0.0 && press_duration_sec < 1.0){
+            // send a regular msg
+        }
+        else if (press_duration_sec >3.0 && press_duration_sec < 6.0){
+            // send a weird msg
+        }
         oled.clearBuffer(); //clear the screen contents
         oled.setFont(u8g2_font_ncenB10_tr);
         char to_print[10];
