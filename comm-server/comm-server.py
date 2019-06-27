@@ -17,6 +17,17 @@ cgitb.enable()
 
 DEFAULT_MSG = "I'm shouting and barfing hysterically"
 
+def get_recent_msgs(num_msgs=3):
+    out = ["" for _ in range(num_msgs)] # the msg at index 0 is the most recent
+    with open("msg_history.txt", "r") as hist_file:
+        for line in hist_file:
+            # Advance msgs in the vector.
+            # Pop the last one.
+            out.pop()
+            # Insert the most recent line
+            out = [line] + out
+        return out
+
 def receive_msgs_to_hist_and_dict(data):
     """
     function that updates the file msg_history.txt with a new msg request
@@ -62,17 +73,12 @@ def receive_msgs_to_hist_and_dict(data):
         
         # visualize the file
         with open("msg_history.txt", "r") as hist_file:
-            print("<br><br>The 3 most recent msgs:<br>")
-            recent = ""
-            before_recent = ""
-            before_before_recent = ""
-            for line in hist_file:
-                before_before_recent = before_recent
-                before_recent = recent
-                recent = line
-            print("Most recent = ", recent, "<br>")
-            print("Less Recent = ", before_recent, "<br>")
-            print("Even Less Recent = ", before_before_recent, "<br>")
+            print("<br><h2>The 10 most recent msgs:</h2><br>")
+
+            recent_msgs = get_recent_msgs(10)
+            for ix in range(len(recent_msgs)):
+                print("The " , ix , "most recent mssage: ", recent_msgs[ix], "<br>")
+
 
 
         
