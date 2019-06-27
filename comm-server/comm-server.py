@@ -9,7 +9,7 @@ import datetime
 cgitb.enable()
 """
 # related files are:
-  * name_to_msg.json -- maps names to the message they will send\
+  * name_to_msg.json -- maps names to the message they will send
   * msg_history.txt  -- keeps track of the msgs that were sent. This is used to retrieve msgs - 
                         aka send them to the clients. Also cool to see history.
 """
@@ -89,6 +89,13 @@ def receive_msgs_to_hist_and_dict(data):
         #Indicate success.
         print("Successfully set new message for cliend:", sender_name, "<br> New msg: ", new_msg_content)
 
+    if cmd == "get_recent":
+        # Print the most recent 3 messges. Recent on top.
+        with open("msg_history.txt", "r") as hist_file:
+            recent_msgs = get_recent_msgs(3)
+            for ix in range(len(recent_msgs)):
+                print(recent_msgs[ix], "<br>")
+ 
 
     if  cmd == "summary":
         # Show a summary of the information currently stored on the server.
