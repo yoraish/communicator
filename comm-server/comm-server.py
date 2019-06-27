@@ -62,7 +62,7 @@ def receive_msgs_to_hist_and_dict(data):
         
         # visualize the file
         with open("msg_history.txt", "r") as hist_file:
-            print("The 3 most recent msgs:<br>")
+            print("<br><br>The 3 most recent msgs:<br>")
             recent = ""
             before_recent = ""
             before_before_recent = ""
@@ -71,7 +71,7 @@ def receive_msgs_to_hist_and_dict(data):
                 before_recent = recent
                 before_before_recent = before_recent
             print("Most recent = ", recent, "<br>")
-            print("Less Recent = ", before_recent, "br>")
+            print("Less Recent = ", before_recent, "<br>")
             print("Even Less Recent = ", before_before_recent, "<br>")
 
 
