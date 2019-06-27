@@ -79,7 +79,22 @@ def receive_msgs_to_hist_and_dict(data):
             for ix in range(len(recent_msgs)):
                 print("The " , ix , "most recent mssage: ", recent_msgs[ix], "<br>")
 
+    if  cmd == "summary":
+        # Show a summary of the information currently stored on the server.
+        # Show title:
+        print("<h>Summary Page for Server Information</h>")
+        # Show the jsom file.
+        with open("name_to_msg.json", 'r') as name_to_msg_file:
+            name_to_msg = json.load(name_to_msg_file)
+            print("<h2> Name to msg JSON file</h2>")
+            print(name_to_msg)
+        # Show the history txt file.
+        with open("msg_history.txt", "r") as hist_file:
+            print("<br><h2>The 10 most recent msgs:</h2><br>")
 
+            recent_msgs = get_recent_msgs(10)
+            for ix in range(len(recent_msgs)):
+                print("The " , ix , "most recent mssage: ", recent_msgs[ix], "<br>")
 
         
         
