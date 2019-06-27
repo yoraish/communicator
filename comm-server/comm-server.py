@@ -87,7 +87,7 @@ def receive_msgs_to_hist_and_dict(data):
             # Write back to json.
             json.dump(name_to_msg, name_to_msg_file)
         #Indicate success.
-        Print("Successfully set new message for cliend:", sender_name, "<br> New msg: ", new_msg_content)
+        print("Successfully set new message for cliend:", sender_name, "<br> New msg: ", new_msg_content)
 
 
     if  cmd == "summary":
