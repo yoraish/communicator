@@ -58,12 +58,25 @@ def receive_msgs_to_hist_and_dict(data):
         with open("msg_history.txt", "a") as hist_file:
             timestamp = datetime.datetime.now()
             hist_file.write(sender_name +"@"+ str(timestamp.hour)+":"+str(timestamp.minute) +" " + msg_to_send +"\n" )
-
             # now clients would be able to grab the last lines of the txt file to get updated messages
-            # visualize the file
+        
+        # visualize the file
+        with open("msg_history.txt", "r") as hist_file:
+            print("The 3 most recent msgs:<br>")
+            recent = ""
+            before_recent = ""
+            before_before_recent = ""
+            for line in hist_file:
+                recent = line
+                before_recent = recent
+                before_before_recent = before_recent
+            print("Most recent = ", recent, "<br>")
+            print("Less Recent = ", before_recent, "br>")
+            print("Even Less Recent = ", before_before_recent, "<br>")
 
-    
-    
+
+        
+        
 
 
 
