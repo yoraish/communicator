@@ -36,8 +36,10 @@ def receive_msgs_to_hist_and_dict(data):
         command string could be:
             * "send"       -- send the stored msg to everyone
             * "set_msg"    --  set the awaiting msg to be a custom msg
-            * "new_msg"    -- (only if the cmd is "set_msg"), specifies the new msg to be stored for later sending, mapped to the sender name
+                * "new_msg_content"    -- (only if the cmd is "set_msg"), specifies the new msg to be stored for later sending, mapped to the sender name
             * "get_recent" -- asks for the recent most msgs in the txt file, the server should return them
+            * "summary"    -- Present a summary for the data in the server, on the browser.
+
     """
     # take the msg that corresponds to the name in the json file, revert it to default for future use, and send the msg to msg_history.txt
     # if name is not in the json file, then add it and assign default msg
@@ -70,6 +72,23 @@ def receive_msgs_to_hist_and_dict(data):
         
         # Indicate success:
         print("Successfully wrote to file: ", msg)
+
+    if  cmd == "set_msg":
+        # Map the new msg to the sender name
+        sender_name = data["sender"].value
+        new_msg_content = data["new_msg_content"].value
+        # Get the json dict.
+        with open("name_to_msg.json", 'r') as name_to_msg_file:
+            name_to_msg = json.load(name_to_msg_file)
+        # Set the new msg.
+        name_to_msg[sender_name] = new_msg_content
+        # Write back to json.
+        with open("name_to_msg.json", 'w') as name_to_msg_file:
+            # Write back to json.
+            json.dump(name_to_msg, name_to_msg_file)
+        #Indicate success.
+        Print("Successfully set new message for cliend:", sender_name, "<br> New msg: ", new_msg_content)
+
 
     if  cmd == "summary":
         # Show a summary of the information currently stored on the server.
