@@ -49,40 +49,32 @@ def receive_msgs_to_hist_and_dict(data):
         with open("name_to_msg.json", 'r') as name_to_msg_file:
             name_to_msg = json.load(name_to_msg_file)
 
-            print("<br> Name to msg===\n")
-            print(name_to_msg)
-            print("<br>Sender name=", data["sender"].value)
-            sender_name = data["sender"].value
-            # if the sender is in the dict, then use the msg that's mapped there
+            # If the sender is in the dict, then use the msg that's mapped there.
             if sender_name in name_to_msg:
                 msg_to_send = name_to_msg[sender_name]
             else:
                 msg_to_send = DEFAULT_MSG
-            # in any case, revert back the msg in the dict to the default now
-            # this also adds the sender if it didn't exist in the dict
+            # In any case, revert back the msg in the dict to the default now.
+            # This also adds the sender if it didn't exist in the dict.s
             name_to_msg[sender_name] = DEFAULT_MSG
         with open("name_to_msg.json", 'w') as name_to_msg_file:
-            # wrtie back to json
+            # Write back to json.
             json.dump(name_to_msg, name_to_msg_file)
 
-        # now actually send the msg (write to text file)
+        # Now actually send the msg (write to text file)
         with open("msg_history.txt", "a") as hist_file:
             timestamp = datetime.datetime.now()
-            hist_file.write(sender_name +"@"+ str(timestamp.hour)+":"+str(timestamp.minute) +" " + msg_to_send +"\n" )
-            # now clients would be able to grab the last lines of the txt file to get updated messages
+            msg = sender_name +"@"+ str(timestamp.hour)+":"+str(timestamp.minute) +" " + msg_to_send
+            hist_file.write(msg +"\n" )
+            # Now clients would be able to grab the last lines of the txt file to get updated messages.
         
-        # visualize the file
-        with open("msg_history.txt", "r") as hist_file:
-            print("<br><h2>The 10 most recent msgs:</h2><br>")
-
-            recent_msgs = get_recent_msgs(10)
-            for ix in range(len(recent_msgs)):
-                print("The " , ix , "most recent mssage: ", recent_msgs[ix], "<br>")
+        # Indicate success:
+        print("Successfully wrote to file: ", msg)
 
     if  cmd == "summary":
         # Show a summary of the information currently stored on the server.
         # Show title:
-        print("<h>Summary Page for Server Information</h>")
+        print("<h1>Summary Page for Server Information</h1>")
         # Show the jsom file.
         with open("name_to_msg.json", 'r') as name_to_msg_file:
             name_to_msg = json.load(name_to_msg_file)
@@ -95,6 +87,8 @@ def receive_msgs_to_hist_and_dict(data):
             recent_msgs = get_recent_msgs(10)
             for ix in range(len(recent_msgs)):
                 print("The " , ix , "most recent mssage: ", recent_msgs[ix], "<br>")
+
+    
 
         
         
