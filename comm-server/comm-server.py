@@ -67,9 +67,9 @@ def receive_msgs_to_hist_and_dict(data):
             before_recent = ""
             before_before_recent = ""
             for line in hist_file:
-                recent = line
-                before_recent = recent
                 before_before_recent = before_recent
+                before_recent = recent
+                recent = line
             print("Most recent = ", recent, "<br>")
             print("Less Recent = ", before_recent, "<br>")
             print("Even Less Recent = ", before_before_recent, "<br>")
