@@ -48,7 +48,7 @@ def receive_msgs_to_hist_and_dict(data):
     if cmd == "send":
         with open("name_to_msg.json", 'r') as name_to_msg_file:
             name_to_msg = json.load(name_to_msg_file)
-
+            sender_name = data["sender"].value
             # If the sender is in the dict, then use the msg that's mapped there.
             if sender_name in name_to_msg:
                 msg_to_send = name_to_msg[sender_name]
